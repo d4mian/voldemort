@@ -136,6 +136,12 @@ public class VoldemortConfig implements Serializable {
     private String mysqlHost;
     private int mysqlPort;
 
+    private String postgresUsername;
+    private String postgresPassword;
+    private String postgresDatabaseName;
+    private String postgresHost;
+    private int postgresPort;
+
     private int numReadOnlyVersions;
     private String readOnlyStorageDir;
     private String readOnlySearchStrategy;
@@ -358,6 +364,12 @@ public class VoldemortConfig implements Serializable {
         this.mysqlHost = props.getString("mysql.host", "localhost");
         this.mysqlPort = props.getInt("mysql.port", 3306);
         this.mysqlDatabaseName = props.getString("mysql.database", "voldemort");
+
+        this.postgresUsername = props.getString("postgres.user", "postgres");
+        this.postgresPassword = props.getString("postgres.password", "postgres");
+        this.postgresHost = props.getString("postgres.host", "localhost");
+        this.postgresPort = props.getInt("postgres.port", 5432);
+        this.postgresDatabaseName = props.getString("postgres.database", "voldemort");
 
         this.testingSlowQueueingDelays = new OpTimeMap(0);
         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.GET_OP_CODE,
@@ -1773,6 +1785,86 @@ public class VoldemortConfig implements Serializable {
      */
     public void setMysqlPort(int mysqlPort) {
         this.mysqlPort = mysqlPort;
+    }
+
+    public String getPostgresUsername() {
+        return postgresUsername;
+    }
+
+    /**
+     * user name to use with Postgres storage engine
+     * 
+     * <ul>
+     * <li>Property : "postgres.user"</li>
+     * <li>Default : "postgres"</li>
+     * </ul>
+     */
+    public void setPostgresUsername(String postgresUsername) {
+        this.postgresUsername = postgresUsername;
+    }
+
+    public String getPostgresPassword() {
+        return postgresPassword;
+    }
+
+    /**
+     * Password to use with Postgres storage engine
+     * 
+     * <ul>
+     * <li>Property :"postgres.password"</li>
+     * <li>Default :"postgres"</li>
+     * </ul>
+     */
+    public void setPostgresPassword(String postgresPassword) {
+        this.postgresPassword = postgresPassword;
+    }
+
+    public String getPostgresDatabaseName() {
+        return postgresDatabaseName;
+    }
+
+    /**
+     * Postgres database name to use
+     * 
+     * <ul>
+     * <li>Property :"postgres.database"</li>
+     * <li>Default :"voldemort"</li>
+     * </ul>
+     */
+    public void setPostgresDatabaseName(String postgresDatabaseName) {
+        this.postgresDatabaseName = postgresDatabaseName;
+    }
+
+    public String getPostgresHost() {
+        return postgresHost;
+    }
+
+    /**
+     * Hostname of the database server for Postgres storage engine
+     * 
+     * <ul>
+     * <li>Property :"postgres.host"</li>
+     * <li>Default :"localhost"</li>
+     * </ul>
+     */
+    public void setPostgresHost(String postgresHost) {
+        this.postgresHost = postgresHost;
+    }
+
+    public int getPostgresPort() {
+        return postgresPort;
+    }
+
+    /**
+     * Port number for the Postgres database server
+     * 
+     * <ul>
+     * <li>Property :"postgres.port"</li>
+     * <li>Default :5432</li>
+     * </ul>
+     */
+    public void setPostgresPort(int postgresPort) {
+        this.postgresPort = postgresPort;
     }
 
     public String getSlopStoreType() {
